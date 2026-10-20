@@ -669,7 +669,7 @@ export default function VideoPage({ src }) {
                   className="social-link-button"
                   href={EMAIL}
                 >
-                  SEND AN EMAIL ↗
+                  ENVIA UN MAIL ↗
                 </a>
               </div>
             </>
