@@ -21,9 +21,10 @@ const ITEMS = [
     page: "gallery",
     fontSize: 48
   },
-  {
+  
+{
     id: "youtube",
-    label: "CANAL DE YOUTUBE",
+    label: "REDES SOCIALES",
     offsetX: 8,
     offsetY: 20,
     skew: 0,
@@ -31,6 +32,7 @@ const ITEMS = [
     page: "youtube",
     fontSize: 48
   },
+
   {
     id: "education",
     label: "EDUCACIÓN",
