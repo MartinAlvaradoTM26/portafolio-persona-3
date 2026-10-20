@@ -569,7 +569,7 @@ export default function VideoPage({ src }) {
             <>
               <div className="social-detail-top">
                 <div className="social-detail-index">01</div>
-                <div className="social-detail-heading">YOUTUBE LOG</div>
+                <div className="social-detail-heading">YOUTUBE</div>
                 <div className="social-detail-count">03 VIDEOS</div>
               </div>
 
@@ -606,7 +606,7 @@ export default function VideoPage({ src }) {
               </div>
 
               <div className="social-bottom">
-                <div className="social-bottom-title">MY CHANNEL</div>
+                <div className="social-bottom-title">MI CANAL</div>
                 <div className="social-description">
                   Más videos en mi canal de YouTube.
                 </div>
@@ -616,7 +616,7 @@ export default function VideoPage({ src }) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  VISIT CHANNEL ↗
+                  VISITAR CANAL ↗
                 </a>
               </div>
             </>
@@ -626,12 +626,12 @@ export default function VideoPage({ src }) {
             <>
               <div className="social-detail-top">
                 <div className="social-detail-index">02</div>
-                <div className="social-detail-heading">ART ACCOUNT</div>
+                <div className="social-detail-heading">CUENTA DE ARTE</div>
                 <div className="social-detail-count">INSTAGRAM</div>
               </div>
 
               <div className="social-bottom">
-                <div className="social-bottom-title">DRAWINGS & ART</div>
+                <div className="social-bottom-title">DIBUJOS Y ARTE</div>
                 <div className="social-description">
                   En mi Instagram comparto mis dibujos y trabajos artísticos.
                   Podés visitar mi perfil para ver más.
@@ -642,7 +642,7 @@ export default function VideoPage({ src }) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  VISIT INSTAGRAM ↗
+                  VISITAR INSTAGRAM ↗
                 </a>
               </div>
             </>
@@ -652,12 +652,12 @@ export default function VideoPage({ src }) {
             <>
               <div className="social-detail-top">
                 <div className="social-detail-index">03</div>
-                <div className="social-detail-heading">CONTACT LOG</div>
+                <div className="social-detail-heading">CONTACTO</div>
                 <div className="social-detail-count">GMAIL</div>
               </div>
 
               <div className="social-bottom">
-                <div className="social-bottom-title">GET IN TOUCH</div>
+                <div className="social-bottom-title">PONGAMONOS EN CONTACTO</div>
                 <div className="social-description">
                   ¿Querés ponerte en contacto conmigo? Podés escribirme
                   directamente a mi correo electrónico.
