@@ -2,17 +2,29 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS = [
-  { id: "i", badge: "I", title: "EDUCATION", subtitle: "University / Coursework", rank: 3 },
-  { id: "ii", badge: "II", title: "SKILLS", subtitle: "Frontend / Design / UI", rank: 4 },
-  { id: "iii", badge: "III", title: "PROJECTS", subtitle: "Featured Work", rank: 5 },
-  { id: "iv", badge: "IV", title: "EXPERIENCE", subtitle: "Internships / Roles", rank: 2 },
+  { id: "i", badge: "I", title: "EDUCATION", subtitle: "Marketing Digital", rank: 5 },
+  { id: "ii", badge: "II", title: "COURSES", subtitle: "Python / UTN", rank: 4 },
+  { id: "iii", badge: "III", title: "SKILLS", subtitle: "Creative / Technical", rank: 6 },
 ];
 
 const EDUCATION_ROWS = [
-  { index: "01", title: "General Education", status: "Complete" },
-  { index: "02", title: "Computer Science Core", status: "In Progress" },
-  { index: "03", title: "Elective Track", status: "Queued" },
-  { index: "04", title: "Capstone Prep", status: "Pending" },
+  { index: "01", title: "Marketing Digital", status: "En curso" },
+  { index: "02", title: "Último año de carrera", status: "Actual" },
+  { index: "03", title: "Estrategia y comunicación", status: "Formación" },
+  { index: "04", title: "Proyectos digitales", status: "Práctica" },
+];
+
+const COURSE_ROWS = [
+  { index: "01", title: "Python", status: "Aprobado" },
+  { index: "02", title: "Curso de programación", status: "UTN" },
+  { index: "03", title: "Calificación final", status: "10/10" },
+];
+
+const SKILL_ROWS = [
+  { index: "01", title: "Dibujo y creatividad visual", status: "Creativo" },
+  { index: "02", title: "Guion y narrativa", status: "Creativo" },
+  { index: "03", title: "Edición de video e imagen", status: "Práctico" },
+  { index: "04", title: "Programación", status: "Técnico" },
 ];
 
 export default function ResumePage({ src }) {
@@ -43,9 +55,7 @@ export default function ResumePage({ src }) {
       <div className="resume-entry-mask" aria-hidden="true">
         <video className="resume-entry-video" src={src} autoPlay loop muted playsInline />
       </div>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap');
-
+      <style> {`
         .resume-entry-mask {
           position: absolute;
           inset: 0;
@@ -408,10 +418,9 @@ export default function ResumePage({ src }) {
           <div className="resume-detail-panel">
             <div className="resume-detail-top">
               <div className="resume-detail-top-index">01</div>
-              <div className="resume-detail-top-title">EDUCATION LOG</div>
-              <div className="resume-detail-top-progress">7/5</div>
+              <div className="resume-detail-top-title">FORMACIÓN</div>
+              <div className="resume-detail-top-progress">5/10</div>
             </div>
-
             <div className="resume-detail-list">
               {EDUCATION_ROWS.map((row) => (
                 <div className="resume-detail-row" key={row.index}>
@@ -421,13 +430,67 @@ export default function ResumePage({ src }) {
                 </div>
               ))}
             </div>
-
             <div className="resume-detail-bottom">
-              <div className="resume-detail-bottom-title">DETAILS</div>
+              <div className="resume-detail-bottom-title">PERFIL ACADÉMICO</div>
               <div className="resume-detail-bullets">
-                <div className="resume-detail-bullet">- Maintain progress across required classes and supporting work.</div>
-                <div className="resume-detail-bullet">- Track portfolio-ready projects tied to coursework and labs.</div>
-                <div className="resume-detail-bullet">- Keep materials prepared for internships, research, and review.</div>
+                <div className="resume-detail-bullet">- Estoy cursando el último año de Marketing Digital.</div>
+                <div className="resume-detail-bullet">- Mi formación incluye estrategia, comunicación y desarrollo de proyectos digitales.</div>
+                <div className="resume-detail-bullet">- Busco combinar creatividad y conocimientos técnicos para resolver necesidades reales.</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {active === 1 && (
+          <div className="resume-detail-panel">
+            <div className="resume-detail-top">
+              <div className="resume-detail-top-index">02</div>
+              <div className="resume-detail-top-title">CURSOS</div>
+              <div className="resume-detail-top-progress">4/10</div>
+            </div>
+            <div className="resume-detail-list">
+              {COURSE_ROWS.map((row) => (
+                <div className="resume-detail-row" key={row.index}>
+                  <div className="resume-detail-row-index">{row.index}</div>
+                  <div className="resume-detail-row-title">{row.title}</div>
+                  <div className="resume-detail-status">{row.status}</div>
+                </div>
+              ))}
+            </div>
+            <div className="resume-detail-bottom">
+              <div className="resume-detail-bottom-title">FORMACIÓN COMPLEMENTARIA</div>
+              <div className="resume-detail-bullets">
+                <div className="resume-detail-bullet">- Realicé un curso de Python de la Universidad Tecnológica Nacional (UTN).</div>
+                <div className="resume-detail-bullet">- Aprobé el curso con una calificación de 10.</div>
+                <div className="resume-detail-bullet">- La experiencia me permitió practicar lógica de programación y resolución de ejercicios.</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {active === 2 && (
+          <div className="resume-detail-panel">
+            <div className="resume-detail-top">
+              <div className="resume-detail-top-index">03</div>
+              <div className="resume-detail-top-title">HABILIDADES</div>
+              <div className="resume-detail-top-progress">6/10</div>
+            </div>
+            <div className="resume-detail-list">
+              {SKILL_ROWS.map((row) => (
+                <div className="resume-detail-row" key={row.index}>
+                  <div className="resume-detail-row-index">{row.index}</div>
+                  <div className="resume-detail-row-title">{row.title}</div>
+                  <div className="resume-detail-status">{row.status}</div>
+                </div>
+              ))}
+            </div>
+            <div className="resume-detail-bottom">
+              <div className="resume-detail-bottom-title">FORTALEZAS</div>
+              <div className="resume-detail-bullets">
+                <div className="resume-detail-bullet">- Creatividad para desarrollar ideas, dibujos y conceptos visuales.</div>
+                <div className="resume-detail-bullet">- Capacidad para escribir guiones y contar historias.</div>
+                <div className="resume-detail-bullet">- Edición audiovisual, programación, inglés y aprendizaje de herramientas digitales.</div>
+                <div className="resume-detail-bullet">- Resolución práctica de problemas, adaptación y búsqueda de soluciones.</div>
               </div>
             </div>
           </div>
