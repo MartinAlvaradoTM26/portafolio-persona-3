@@ -17,7 +17,7 @@ const EDUCATION_ROWS = [
 const COURSE_ROWS = [
   { index: "01", title: "Python", status: "Aprobado" },
   { index: "02", title: "Curso de programación", status: "UTN" },
-  { index: "03", title: "Calificación final", status: "10/10" },
+  { index: "03", title: "Calificación final", status: "Aprobado" },
 ];
 
 const SKILL_ROWS = [
@@ -268,6 +268,8 @@ export default function ResumePage({ src }) {
             16px 16px 0 rgba(0, 6, 30, 0.55);
           overflow-y: auto;
           overflow-x: hidden;
+          pointer-events: auto;
+          overscroll-behavior-y: contain;
           scrollbar-width: thin;
           scrollbar-color: #8df6ff #101b5c;
         }
