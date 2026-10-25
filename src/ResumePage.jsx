@@ -55,7 +55,7 @@ export default function ResumePage({ src }) {
       <div className="resume-entry-mask" aria-hidden="true">
         <video className="resume-entry-video" src={src} autoPlay loop muted playsInline />
       </div>
-      <style> {`
+      <style>{`
         .resume-entry-mask {
           position: absolute;
           inset: 0;
@@ -257,7 +257,8 @@ export default function ResumePage({ src }) {
           top: 9.5vh;
           right: 4.5vw;
           width: min(39vw, 620px);
-          min-height: 74vh;
+          height: 80vh;
+          max-height: 80vh;
           z-index: 12;
           padding: 22px 24px 24px 24px;
           background: linear-gradient(180deg, rgba(15, 28, 105, 0.96) 0%, rgba(8, 16, 68, 0.97) 100%);
@@ -265,7 +266,20 @@ export default function ResumePage({ src }) {
           box-shadow:
             inset 0 0 0 1px rgba(133, 244, 255, 0.16),
             16px 16px 0 rgba(0, 6, 30, 0.55);
-          overflow: hidden;
+          overflow-y: auto;
+          overflow-x: hidden;
+          scrollbar-width: thin;
+          scrollbar-color: #8df6ff #101b5c;
+        }
+        .resume-detail-panel::-webkit-scrollbar {
+          width: 8px;
+        }
+        .resume-detail-panel::-webkit-scrollbar-track {
+          background: #101b5c;
+        }
+        .resume-detail-panel::-webkit-scrollbar-thumb {
+          background: #8df6ff;
+          border-radius: 4px;
         }
         .resume-detail-panel::before {
           content: "";
@@ -279,7 +293,7 @@ export default function ResumePage({ src }) {
         .resume-detail-top {
           position: relative;
           display: grid;
-          grid-template-columns: 70px 1fr auto;
+          grid-template-columns: 70px minmax(0, 1fr);
           align-items: center;
           gap: 14px;
           min-height: 92px;
@@ -299,12 +313,6 @@ export default function ResumePage({ src }) {
           font-size: 42px;
           line-height: 0.92;
           letter-spacing: 1px;
-        }
-        .resume-detail-top-progress {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 42px;
-          letter-spacing: 2px;
-          line-height: 1;
         }
         .resume-detail-list {
           position: relative;
@@ -419,7 +427,6 @@ export default function ResumePage({ src }) {
             <div className="resume-detail-top">
               <div className="resume-detail-top-index">01</div>
               <div className="resume-detail-top-title">FORMACIÓN</div>
-              <div className="resume-detail-top-progress">5/10</div>
             </div>
             <div className="resume-detail-list">
               {EDUCATION_ROWS.map((row) => (
@@ -446,7 +453,6 @@ export default function ResumePage({ src }) {
             <div className="resume-detail-top">
               <div className="resume-detail-top-index">02</div>
               <div className="resume-detail-top-title">CURSOS</div>
-              <div className="resume-detail-top-progress">4/10</div>
             </div>
             <div className="resume-detail-list">
               {COURSE_ROWS.map((row) => (
@@ -473,7 +479,6 @@ export default function ResumePage({ src }) {
             <div className="resume-detail-top">
               <div className="resume-detail-top-index">03</div>
               <div className="resume-detail-top-title">HABILIDADES</div>
-              <div className="resume-detail-top-progress">6/10</div>
             </div>
             <div className="resume-detail-list">
               {SKILL_ROWS.map((row) => (
