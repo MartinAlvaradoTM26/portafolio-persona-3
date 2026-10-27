@@ -7,6 +7,7 @@ import main3 from "./assets/mainf.jpeg";
 import P3Menu from './P3Menu'
 import VideoPage from './VideoPage'
 import ResumePage from './ResumePage'
+import ProjectsPage from './ProjectsPage'
 import PageTransition from './PageTransition'
 import Socials from './Socials'
 import AboutMe from './AboutMe'
@@ -50,6 +51,9 @@ function AnimatedRoutes() {
         {/* Sección Educación (usa la estructura visual de estadísticas de Resume) */}
         <Route path="/education" element={
           <PageTransition><ResumePage src={main2} /></PageTransition>
+        } />
+        <Route path="/projects" element={
+          <PageTransition><ProjectsPage src={main2} /></PageTransition>
         } />
       </Routes>
     </AnimatePresence>
