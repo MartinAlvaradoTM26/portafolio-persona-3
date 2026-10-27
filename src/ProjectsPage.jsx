@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 const ITEMS = [
   { id: "connexion", badge: "I", title: "CONNEXION", subtitle: "Plan de marketing digital", rank: 5 },
   { id: "lazalda", badge: "II", title: "LAZALDA", subtitle: "Agencia de marketing digital", rank: 4 },
-  { id: "ford", badge: "III", title: "FORD", subtitle: "Estrategia de marca", rank: 4 },
-  { id: "primekeys", badge: "IV", title: "PRIME KEYS", subtitle: "Tienda online ficticia", rank: 3 },
-  { id: "youtube", badge: "V", title: "YOUTUBE", subtitle: "Producción audiovisual", rank: 5 },
-  { id: "python", badge: "VI", title: "PYTHON", subtitle: "Ejercicios de programación", rank: 3 },
+  { id: "primekeys", badge: "III", title: "PRIME KEYS", subtitle: "Tienda online ficticia", rank: 3 },
+  { id: "youtube", badge: "IV", title: "YOUTUBE", subtitle: "Producción audiovisual", rank: 5 },
+  { id: "python", badge: "V", title: "PYTHON", subtitle: "Ejercicios de programación", rank: 3 },
 ];
 
 const PROJECT_ROWS = [
