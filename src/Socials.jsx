@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import char1 from "./assets/char1.png";
-import char2 from "./assets/char2.png";
-import char3 from "./assets/char3.png";
-import bgVideo from "./assets/mainf.jpeg";
+import bgVideo from "./assets/videofondo.mp4";
 import newsign from "./assets/newsign.png";
 import icon1 from "./assets/icon1.png";
 import icon2 from "./assets/icon2.png";
@@ -23,8 +20,6 @@ import eyelessJack from "./assets/traditional/Eyeless Jack.jpeg";
 import youngNeil from "./assets/traditional/Young neil Scott pilgrim.jpeg";
 import lapisLazuli from "./assets/traditional/Lapis lazuli steven universe.jpeg";
 import roaringKnight from "./assets/traditional/Roaring knight deltarune .jpeg";
-
-const CHARS = [char1, char2, char3];
 
 const ROLES = [
   { text: "DIGITAL", color: "#00dff7", bg: "rgba(0,223,247,0.12)", border: "rgba(0,223,247,0.5)" },
