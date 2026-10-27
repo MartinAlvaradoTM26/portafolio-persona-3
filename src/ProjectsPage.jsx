@@ -441,28 +441,21 @@ export default function ProjectsPage({ src }) {
         )}
         {active === 2 && (
           <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">03</div><div className="projects-detail-top-title">FORD</div></div>
-            <div className="projects-detail-list">{[["01","Análisis de Toyota y Chevrolet","Competencia"],["02","Buyer persona y FODA","Estrategia"],["03","Pilares de contenido y arquetipos","Marca"],["04","Podcast e influencer","Contenido"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Análisis del posicionamiento de Ford frente a sus competidores y de la comunicación de sus productos.</div><div className="projects-detail-bullet">- Propuesta de contenidos y podcast sobre modelos como Everest y F-150.</div><div className="projects-detail-bullet">- Práctica en análisis competitivo, estrategia de contenidos y comunicación de producto.</div></div></div>
-          </div>
-        )}
-        {active === 3 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">04</div><div className="projects-detail-top-title">PRIME KEYS</div></div>
+            <div className="projects-detail-top"><div className="projects-detail-top-index">03</div><div className="projects-detail-top-title">PRIME KEYS</div></div>
             <div className="projects-detail-list">{[["01","Tienda ficticia en Tienda Nube","E-commerce"],["02","Teclados de oficina y gamer","Productos"],["03","Segmentación de públicos","Audiencia"],["04","Selección de influencers","Promoción"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
             <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Propuesta para una tienda online con productos para uso laboral y gaming.</div><div className="projects-detail-bullet">- Selección de perfiles de influencers para conectar con distintos públicos.</div><div className="projects-detail-bullet">- Experiencia en marketing de e-commerce, segmentación y promoción digital.</div></div></div>
           </div>
         )}
-        {active === 4 && (
+        {active === 3 && (
           <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">05</div><div className="projects-detail-top-title">YOUTUBE Y PRODUCCIÓN AUDIOVISUAL</div></div>
+            <div className="projects-detail-top"><div className="projects-detail-top-index">04</div><div className="projects-detail-top-title">YOUTUBE Y PRODUCCIÓN AUDIOVISUAL</div></div>
             <div className="projects-detail-list">{[["01","Ideas y enfoque de videos","Concepto"],["02","Guion y narrativa","Escritura"],["03","Edición de video e imagen","Edición"],["04","Miniaturas e identidad visual","Diseño"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
             <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Creación de contenido para YouTube sobre análisis, historias y cultura de internet.</div><div className="projects-detail-bullet">- Combinación de planificación, guion, edición y presentación visual.</div><div className="projects-detail-bullet">- Experiencia útil en comunicación audiovisual, creación de contenido y marketing digital.</div></div></div>
           </div>
         )}
-        {active === 5 && (
+        {active === 4 && (
           <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">06</div><div className="projects-detail-top-title">PYTHON</div></div>
+            <div className="projects-detail-top"><div className="projects-detail-top-index">05</div><div className="projects-detail-top-title">PYTHON</div></div>
             <div className="projects-detail-list">{[["01","Calculadora de supermercado","Lógica"],["02","Lectura de CSV y Excel","Datos"],["03","Gráfico de temperaturas","Matplotlib"],["04","Dibujo con Turtle","Práctica"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
             <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Práctica inicial de lógica, cálculos y manejo básico de datos con Python.</div><div className="projects-detail-bullet">- Uso de pandas y Matplotlib para trabajar con archivos y representar datos en gráficos.</div><div className="projects-detail-bullet">- Base para continuar aprendiendo desarrollo de software y automatización.</div></div></div>
           </div>
