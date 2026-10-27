@@ -1,473 +1,191 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const ITEMS = [
-  { id: "connexion", badge: "I", title: "CONNEXION", subtitle: "Plan de marketing digital", rank: 5 },
-  { id: "lazalda", badge: "II", title: "LAZALDA", subtitle: "Agencia de marketing digital", rank: 4 },
-  { id: "ford", badge: "III", title: "FORD", subtitle: "Estrategia de marca", rank: 4 },
-  { id: "primekeys", badge: "IV", title: "PRIME KEYS", subtitle: "Tienda online ficticia", rank: 3 },
-  { id: "youtube", badge: "V", title: "YOUTUBE", subtitle: "Producción audiovisual", rank: 5 },
-  { id: "python", badge: "VI", title: "PYTHON", subtitle: "Ejercicios de programación", rank: 3 },
-];
-
-const PROJECT_ROWS = [
-  { index: "01", title: "Análisis del entorno y competencia", status: "Estrategia" },
-  { index: "02", title: "Público objetivo y buyer personas", status: "Audiencia" },
-  { index: "03", title: "SEO, SEM y redes sociales", status: "Digital" },
-  { index: "04", title: "Plan de reputación y crisis", status: "Gestión" },
-];
+const PROJECTS = [
+  {
+    rank: '6', number: '01', title: 'CONNEXION STUDIO EVENTOS', subtitle: 'PLAN DE MARKETING DIGITAL', category: 'PROYECTO UNIVERSITARIO',
+    overview: 'Desarrollo de un plan de marketing digital para una productora de eventos, con foco en clientes corporativos y sociales.',
+    work: [
+      'Análisis del entorno, la competencia y el público objetivo mediante herramientas como PESTEL, FODA y buyer personas.',
+      'Definición de objetivos SMART y estrategias de SEO, SEM y redes sociales.',
+      'Propuesta de contenidos, calendario de publicaciones y respuestas para posibles crisis de reputación digital.'
+    ],
+    future: 'Este trabajo me permite demostrar que puedo investigar una marca, organizar una estrategia y conectar objetivos de negocio con acciones digitales concretas.'
+  },
+  {
+    rank: '5', number: '02', title: 'LAZALDA', subtitle: 'IDENTIDAD Y ESTRATEGIA DE MARCA', category: 'PROYECTO UNIVERSITARIO',
+    overview: 'Creación conceptual de una agencia de marketing digital orientada a marcas de moda, belleza y accesorios.',
+    work: [
+      'Desarrollo del nombre, identidad, misión, visión y propuesta de valor.',
+      'Análisis del mercado, competidores, fortalezas, debilidades y oportunidades.',
+      'Definición de públicos, buyer personas, customer journey y objetivos SMART.'
+    ],
+    future: 'Aporta experiencia en construcción de marca y planificación estratégica, desde la investigación inicial hasta la definición de una propuesta diferenciada.'
+  },
+  {
+    rank: '5', number: '03', title: 'FORD', subtitle: 'ANÁLISIS DE MARKETING', category: 'TRABAJO UNIVERSITARIO · CASO ACADÉMICO',
+    overview: 'Caso académico desarrollado en el marco de la carrera de Marketing Digital. No fue un trabajo contratado ni una colaboración laboral con Ford.',
+    work: [
+      'Análisis de competidores como Toyota y Chevrolet.',
+      'Desarrollo de perfiles de público, análisis FODA, objetivos SMART y pilares de contenido.',
+      'Propuesta de contenidos audiovisuales y de un podcast relacionado con modelos de la marca, como Everest y F-150.'
+    ],
+    future: 'Este proyecto me ayudó a practicar cómo analizar una marca real desde una perspectiva académica, fundamentar decisiones de comunicación y convertir una estrategia en ideas de contenido.'
+  },
+  {
+    rank: '4', number: '04', title: 'PRIME KEYS', subtitle: 'E-COMMERCE Y CONTENIDOS', category: 'PROYECTO UNIVERSITARIO',
+    overview: 'Desarrollo de una propuesta para una tienda online ficticia de teclados para oficina y gaming.',
+    work: [
+      'Organización de la oferta según necesidades de uso y públicos diferentes.',
+      'Definición de perfiles de influencers para comunicar los productos: Reite Grone para gaming y Lean Riccio para oficina.',
+      'Vinculación entre el producto, el público objetivo y el enfoque de comunicación.'
+    ],
+    future: 'Sirve como práctica de marketing para comercio electrónico, segmentación y selección de creadores según la audiencia y el posicionamiento del producto.'
+  },
+  {
+    rank: '6', number: '05', title: 'YOUTUBE', subtitle: 'CREACIÓN AUDIOVISUAL', category: 'PROYECTO PERSONAL',
+    overview: 'Desarrollo de contenido para mi canal, combinando investigación de temas, planificación, guion y producción audiovisual.',
+    work: [
+      'Desarrollo de ideas y enfoques para videos sobre cultura de internet, creepypastas y análisis de contenidos.',
+      'Trabajo con guiones, narración, edición de video y preparación de miniaturas.',
+      'Organización del contenido para que el tema, el título y la presentación visual mantengan una misma dirección.'
+    ],
+    future: 'Me permite seguir construyendo habilidades de storytelling, edición, comunicación digital y producción de piezas audiovisuales para proyectos propios o de marcas.'
+  },
+  {
+    rank: '5', number: '06', title: 'PYTHON', subtitle: 'PRÁCTICAS DE PROGRAMACIÓN', category: 'FORMACIÓN Y EJERCICIOS',
+    overview: 'Prácticas realizadas durante mi aprendizaje de Python, incluyendo ejercicios de lógica y manejo básico de datos.',
+    work: [
+      'Creación de un programa de cálculo para compras de supermercado.',
+      'Lectura y representación de datos de temperatura a partir de archivos CSV y Excel con pandas y Matplotlib.',
+      'Ejercicios de dibujo y secuencias mediante la biblioteca turtle.'
+    ],
+    future: 'Estos ejercicios fortalecen mis bases de programación, pensamiento lógico y resolución de problemas. También representan un primer paso hacia mi interés por el desarrollo de software.'
+  }
+]
 
 export default function ProjectsPage({ src }) {
-  const navigate = useNavigate();
-  const [active, setActive] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const [active, setActive] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 80);
-    return () => clearTimeout(t);
-  }, []);
+    const onKey = (event) => {
+      if (event.key === 'ArrowUp') {
+        event.preventDefault()
+        setActive((current) => Math.max(0, current - 1))
+      }
+      if (event.key === 'ArrowDown') {
+        event.preventDefault()
+        setActive((current) => Math.min(PROJECTS.length - 1, current + 1))
+      }
+      if (event.key === 'Escape' || event.key === 'Backspace' || event.key === 'ArrowLeft') {
+        navigate('/')
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [navigate])
 
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "ArrowUp") setActive((i) => Math.max(0, i - 1));
-      if (e.key === "ArrowDown") setActive((i) => Math.min(ITEMS.length - 1, i + 1));
-      if (e.key === "ArrowLeft") navigate(-1);
-      if (e.key === "Escape" || e.key === "Backspace") navigate(-1);
-    };
-
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [navigate]);
+  const project = PROJECTS[active]
 
   return (
-    <div id="menu-screen">
-      <video src={src} autoPlay loop muted playsInline />
-      <div className="projects-entry-mask" aria-hidden="true">
-        <video className="projects-entry-video" src={src} autoPlay loop muted playsInline />
-      </div>
-      <style>{`
-        .projects-entry-mask {
-          position: absolute;
-          inset: 0;
-          z-index: 9;
-          overflow: hidden;
-          background: #0047FF;
-          clip-path: circle(0 at 50% 50%);
-          animation: projects-entry-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          pointer-events: none;
-        }
+    <div id="menu-screen" className="projects-page">
+      {src && <video className="projects-background-video" src={src} autoPlay loop muted playsInline />}
+      <div className="projects-shade" />
+      <main className="projects-layout">
+        <section className="projects-left">
+          <header className="projects-heading">
+            <div className="projects-kicker">PORTFOLIO / 05</div>
+            <h1>PROJECTS</h1>
+            <p>TRABAJOS Y EXPERIENCIAS</p>
+          </header>
+          <div className="projects-selector" aria-label="Seleccionar proyecto">
+            {PROJECTS.map((item, index) => (
+              <button
+                type="button"
+                key={item.number}
+                className={`projects-card ${active === index ? 'active' : ''}`}
+                onClick={() => setActive(index)}
+                aria-pressed={active === index}
+              >
+                <span className="projects-card-number">{item.number}</span>
+                <span className="projects-card-main">
+                  <span className="projects-card-title">{item.title}</span>
+                  <span className="projects-card-subtitle">{item.subtitle}</span>
+                </span>
+                <span className="projects-rank"><small>RANK</small>{item.rank}</span>
+              </button>
+            ))}
+          </div>
+          <button className="projects-back" type="button" onClick={() => navigate('/')}>← VOLVER AL MENÚ</button>
+        </section>
 
-        .projects-entry-video {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        @keyframes projects-entry-reveal {
-          from { clip-path: circle(0 at 50% 50%); }
-          to { clip-path: circle(150vmax at 50% 50%); }
-        }
-
-        .projects-overlay {
-          position: absolute;
-          inset: 0;
-          z-index: 10;
-          pointer-events: none;
-        }
-
-        .projects-stack {
-          position: absolute;
-          top: 9vh;
-          left: 2.8vw;
-          width: min(47vw, 720px);
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          pointer-events: none;
-          transform: scale(0.9);
-          transform-origin: top left;
-        }
-
-        .projects-list-tag {
-          font-family: 'Anton', sans-serif;
-          font-size: 92px;
-          line-height: 0.9;
-          color: #f6fbff;
-          letter-spacing: 2px;
-          margin: 0 0 6px 12px;
-          text-shadow: 0 2px 0 rgba(0,0,0,0.18);
-          opacity: 0;
-          transform: translateX(-24px);
-          transition: opacity 0.35s ease, transform 0.35s ease;
-        }
-        .projects-list-tag.mounted {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        .projects-card-wrap {
-          position: relative;
-          opacity: 0;
-          transform: translateX(-48px);
-          transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-          pointer-events: all;
-          cursor: pointer;
-        }
-        .projects-card-wrap.mounted {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        .projects-card {
-          position: relative;
-          height: 112px;
-          background: #10185f;
-          clip-path: polygon(0 0, 97% 0, 100% 100%, 3% 100%);
-          box-shadow: 0 8px 0 rgba(5, 13, 59, 0.85);
-          transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
-          overflow: visible;
-        }
-        .projects-card-wrap.active .projects-card {
-          background: #ffffff;
-          box-shadow: 10px 8px 0 #d63232;
-          transform: translateX(6px);
-        }
-
-        .projects-card-inner {
-          position: absolute;
-          inset: 0;
-          padding: 14px 22px 14px 62px;
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-        }
-
-        .projects-badge {
-          position: absolute;
-          top: 10px;
-          left: -10px;
-          width: 56px;
-          height: 70px;
-          background: #0b113d;
-          border: 3px solid #9cf7ff;
-          clip-path: polygon(14% 0, 100% 0, 84% 100%, 0 100%);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transform: rotate(-8deg);
-          box-shadow: 0 4px 0 rgba(0,0,0,0.28);
-          transition: background 0.22s ease, border-color 0.22s ease;
-        }
-        .projects-badge-text {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 36px;
-          color: #d2fdff;
-          letter-spacing: 1px;
-          transform: rotate(8deg);
-        }
-        .projects-card-wrap.active .projects-badge {
-          background: #000;
-          border-color: #000;
-        }
-        .projects-card-wrap.active .projects-badge-text {
-          color: #fff;
-        }
-
-        .projects-title {
-          font-family: 'Anton', sans-serif;
-          font-size: 56px;
-          line-height: 0.9;
-          letter-spacing: 1px;
-          color: #a5f6ff;
-          transition: color 0.22s ease;
-        }
-        .projects-card-wrap.active .projects-title {
-          color: #000;
-        }
-
-        .projects-rank {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-top: 2px;
-          flex-shrink: 0;
-        }
-        .projects-rank-label {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 28px;
-          letter-spacing: 2px;
-          color: #9ffbff;
-          transition: color 0.22s ease;
-        }
-        .projects-rank-number {
-          font-family: 'Anton', sans-serif;
-          font-size: 70px;
-          line-height: 0.82;
-          color: #9ffbff;
-          transition: color 0.22s ease;
-        }
-        .projects-card-wrap.active .projects-rank-label,
-        .projects-card-wrap.active .projects-rank-number {
-          color: #000;
-        }
-
-        .projects-subtitle-bar {
-          position: absolute;
-          left: 64px;
-          right: 14px;
-          bottom: 12px;
-          height: 34px;
-          background: #85f4ff;
-          clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
-          display: flex;
-          align-items: center;
-          padding: 0 18px;
-          transition: background 0.22s ease;
-        }
-        .projects-card-wrap.active .projects-subtitle-bar {
-          background: #000;
-        }
-
-        .projects-subtitle {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 28px;
-          line-height: 1;
-          letter-spacing: 1px;
-          color: #041238;
-          transition: color 0.22s ease;
-        }
-        .projects-card-wrap.active .projects-subtitle {
-          color: #fff;
-        }
-
-        .projects-detail-panel {
-          position: absolute;
-          top: 9.5vh;
-          right: 4.5vw;
-          width: min(39vw, 620px);
-          height: 80vh;
-          max-height: 80vh;
-          z-index: 12;
-          padding: 22px 24px 24px 24px;
-          background: linear-gradient(180deg, rgba(15, 28, 105, 0.96) 0%, rgba(8, 16, 68, 0.97) 100%);
-          clip-path: polygon(0 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
-          box-shadow:
-            inset 0 0 0 1px rgba(133, 244, 255, 0.16),
-            16px 16px 0 rgba(0, 6, 30, 0.55);
-          overflow-y: auto;
-          overflow-x: hidden;
-          pointer-events: auto;
-          overscroll-behavior-y: contain;
-          scrollbar-width: thin;
-          scrollbar-color: #8df6ff #101b5c;
-        }
-        .projects-detail-panel::-webkit-scrollbar {
-          width: 8px;
-        }
-        .projects-detail-panel::-webkit-scrollbar-track {
-          background: #101b5c;
-        }
-        .projects-detail-panel::-webkit-scrollbar-thumb {
-          background: #8df6ff;
-          border-radius: 4px;
-        }
-        .projects-detail-panel::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(135deg, rgba(133, 244, 255, 0.08) 0 15%, transparent 15% 100%),
-            linear-gradient(180deg, rgba(255,255,255,0.05), transparent 24%);
-          pointer-events: none;
-        }
-        .projects-detail-top {
-          position: relative;
-          display: grid;
-          grid-template-columns: 70px minmax(0, 1fr);
-          align-items: center;
-          gap: 14px;
-          min-height: 92px;
-          padding: 0 18px;
-          background: linear-gradient(90deg, #8ef5ff 0%, #d3fdff 100%);
-          clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
-          color: #08153f;
-          box-shadow: 10px 0 0 rgba(255, 94, 136, 0.88);
-        }
-        .projects-detail-top-index {
-          font-family: 'Anton', sans-serif;
-          font-size: 46px;
-          line-height: 1;
-        }
-        .projects-detail-top-title {
-          font-family: 'Anton', sans-serif;
-          font-size: 42px;
-          line-height: 0.92;
-          letter-spacing: 1px;
-        }
-        .projects-detail-list {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          margin-top: 18px;
-        }
-        .projects-detail-row {
-          display: grid;
-          grid-template-columns: 50px 1fr auto;
-          align-items: center;
-          gap: 14px;
-          min-height: 56px;
-          padding: 0 14px;
-          background: rgba(8, 18, 72, 0.96);
-          clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
-          box-shadow: inset 0 0 0 1px rgba(140, 239, 255, 0.12);
-          transition: transform 0.16s ease, background 0.16s ease;
-        }
-        .projects-detail-row:hover {
-          transform: translateX(4px);
-          background: rgba(12, 26, 94, 1);
-        }
-        .projects-detail-row-index {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 26px;
-          letter-spacing: 1px;
-          color: #94f4ff;
-        }
-        .projects-detail-row-title {
-          font-family: 'Anton', sans-serif;
-          font-size: 28px;
-          line-height: 1;
-          color: #f2fcff;
-        }
-        .projects-detail-status {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 22px;
-          line-height: 1;
-          letter-spacing: 1.1px;
-          color: #06133b;
-          background: #8df6ff;
-          padding: 7px 12px;
-          clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
-        }
-        .projects-detail-bottom {
-          position: relative;
-          margin-top: 22px;
-          padding: 18px;
-          background: rgba(5, 13, 57, 0.97);
-          clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
-          box-shadow: inset 0 0 0 1px rgba(145, 239, 255, 0.12);
-        }
-        .projects-detail-bottom-title {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 30px;
-          letter-spacing: 2px;
-          color: #91f5ff;
-          margin-bottom: 14px;
-        }
-        .projects-detail-bullets {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        .projects-detail-bullet {
-          font-family: 'Anton', sans-serif;
-          font-size: 21px;
-          line-height: 1.15;
-          color: #edfaff;
-        }
-
-        .projects-detail-panel { max-height: 80vh; overflow-y: auto; pointer-events: auto; }
-        .projects-overlay, .projects-stack { pointer-events: auto; }
-        .projects-detail-panel, .projects-detail-panel * { box-sizing: border-box; }
-        @media (max-width: 900px) {
-          .projects-stack { top: 3vh; left: 2vw; width: 44vw; transform: scale(.78); }
-          .projects-detail-panel { top: 4vh; right: 2vw; width: 51vw; max-height: 90vh; padding: 14px; }
-          .projects-list-tag { font-size: clamp(36px, 6vw, 64px); }
-          .projects-card { height: 96px; }
-          .projects-title { font-size: clamp(24px, 3vw, 38px); }
-          .projects-rank-number { font-size: 48px; }
-        }
-      `}</style>
-
-      <div className="projects-overlay">
-        <div className="projects-stack">
-          <div className={`projects-list-tag${mounted ? " mounted" : ""}`}>PROJECTS</div>
-          {ITEMS.map((item, index) => (
-            <div
-              key={item.id}
-              className={`projects-card-wrap${active === index ? " active" : ""}${mounted ? " mounted" : ""}`}
-              style={{ transitionDelay: `${index * 55}ms` }}
-              onMouseEnter={() => {
-                setActive(index);
-              }}
-              onClick={() => {
-                setActive(index);
-              }}
-            >
-              <div className="projects-card">
-                <div className="projects-badge">
-                  <div className="projects-badge-text">{item.badge}</div>
-                </div>
-                <div className="projects-card-inner">
-                  <div className="projects-title">{item.title}</div>
-                  <div className="projects-rank">
-                    <div className="projects-rank-label">RANK</div>
-                    <div className="projects-rank-number">{item.rank}</div>
-                  </div>
-                </div>
-                <div className="projects-subtitle-bar">
-                  <div className="projects-subtitle">{item.subtitle}</div>
-                </div>
-              </div>
+        <section className="projects-detail" aria-live="polite" key={project.number}>
+          <div className="projects-detail-header">
+            <span className="projects-detail-index">{project.number}</span>
+            <div>
+              <div className="projects-detail-label">{project.category}</div>
+              <h2>{project.title}</h2>
+              <p className="projects-detail-subtitle">{project.subtitle}</p>
             </div>
-          ))}
-        </div>
+          </div>
+          <div className="projects-detail-content">
+            <h3>RESUMEN</h3>
+            <p>{project.overview}</p>
+            <h3>QUÉ DESARROLLÉ</h3>
+            <ul>
+              {project.work.map((line) => <li key={line}>{line}</li>)}
+            </ul>
+            <h3>APORTE A MI DESARROLLO</h3>
+            <p>{project.future}</p>
+          </div>
+          <div className="projects-detail-footer">MARTIN ALVARADO <span>·</span> SELECCIONÁ OTRO PROYECTO PARA EXPLORARLO</div>
+        </section>
+      </main>
 
-        {active === 0 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">01</div><div className="projects-detail-top-title">CONNEXION STUDIO EVENTOS</div></div>
-            <div className="projects-detail-list">{[["01","Análisis del entorno y competencia","Estrategia"],["02","Buyer personas y públicos","Audiencia"],["03","SEO, SEM y redes sociales","Digital"],["04","Plan de gestión de crisis","Reputación"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Plan de marketing integral para una productora de eventos, con segmentos corporativo y social.</div><div className="projects-detail-bullet">- Desarrollo de objetivos digitales, estrategias de posicionamiento y propuestas para responder a crisis.</div><div className="projects-detail-bullet">- Experiencia aplicable a planificación estratégica, comunicación de marca y gestión de clientes.</div></div></div>
-          </div>
-        )}
-        {active === 1 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">02</div><div className="projects-detail-top-title">LAZALDA</div></div>
-            <div className="projects-detail-list">{[["01","Identidad y propuesta de valor","Marca"],["02","Análisis FODA y PESTEL","Diagnóstico"],["03","Buyer persona y customer journey","Cliente"],["04","Objetivos SMART y servicios","Planificación"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Concepto de agencia digital enfocada en marcas de moda, accesorios y belleza.</div><div className="projects-detail-bullet">- Definición de misión, visión, servicios, diferenciación y herramientas de análisis estratégico.</div><div className="projects-detail-bullet">- Experiencia en branding, investigación de mercado y armado de propuestas para clientes.</div></div></div>
-          </div>
-        )}
-        {active === 2 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">03</div><div className="projects-detail-top-title">FORD</div></div>
-            <div className="projects-detail-list">{[["01","Análisis de Toyota y Chevrolet","Competencia"],["02","Buyer persona y FODA","Estrategia"],["03","Pilares de contenido y arquetipos","Marca"],["04","Podcast e influencer","Contenido"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Análisis del posicionamiento de Ford frente a sus competidores y de la comunicación de sus productos.</div><div className="projects-detail-bullet">- Propuesta de contenidos y podcast sobre modelos como Everest y F-150.</div><div className="projects-detail-bullet">- Práctica en análisis competitivo, estrategia de contenidos y comunicación de producto.</div></div></div>
-          </div>
-        )}
-        {active === 3 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">04</div><div className="projects-detail-top-title">PRIME KEYS</div></div>
-            <div className="projects-detail-list">{[["01","Tienda ficticia en Tienda Nube","E-commerce"],["02","Teclados de oficina y gamer","Productos"],["03","Segmentación de públicos","Audiencia"],["04","Selección de influencers","Promoción"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Propuesta para una tienda online con productos para uso laboral y gaming.</div><div className="projects-detail-bullet">- Selección de perfiles de influencers para conectar con distintos públicos.</div><div className="projects-detail-bullet">- Experiencia en marketing de e-commerce, segmentación y promoción digital.</div></div></div>
-          </div>
-        )}
-        {active === 4 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">05</div><div className="projects-detail-top-title">YOUTUBE Y PRODUCCIÓN AUDIOVISUAL</div></div>
-            <div className="projects-detail-list">{[["01","Ideas y enfoque de videos","Concepto"],["02","Guion y narrativa","Escritura"],["03","Edición de video e imagen","Edición"],["04","Miniaturas e identidad visual","Diseño"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Creación de contenido para YouTube sobre análisis, historias y cultura de internet.</div><div className="projects-detail-bullet">- Combinación de planificación, guion, edición y presentación visual.</div><div className="projects-detail-bullet">- Experiencia útil en comunicación audiovisual, creación de contenido y marketing digital.</div></div></div>
-          </div>
-        )}
-        {active === 5 && (
-          <div className="projects-detail-panel">
-            <div className="projects-detail-top"><div className="projects-detail-top-index">06</div><div className="projects-detail-top-title">PYTHON</div></div>
-            <div className="projects-detail-list">{[["01","Calculadora de supermercado","Lógica"],["02","Lectura de CSV y Excel","Datos"],["03","Gráfico de temperaturas","Matplotlib"],["04","Dibujo con Turtle","Práctica"]].map(([index,title,status]) => <div className="projects-detail-row" key={index}><div className="projects-detail-row-index">{index}</div><div className="projects-detail-row-title">{title}</div><div className="projects-detail-status">{status}</div></div>)}</div>
-            <div className="projects-detail-bottom"><div className="projects-detail-bottom-title">APORTE Y APRENDIZAJE</div><div className="projects-detail-bullets"><div className="projects-detail-bullet">- Práctica inicial de lógica, cálculos y manejo básico de datos con Python.</div><div className="projects-detail-bullet">- Uso de pandas y Matplotlib para trabajar con archivos y representar datos en gráficos.</div><div className="projects-detail-bullet">- Base para continuar aprendiendo desarrollo de software y automatización.</div></div></div>
-          </div>
-        )}
-      </div>
+      <style>{`
+        .projects-page { position: relative; width: 100%; height: 100vh; min-height: 560px; overflow: hidden; color: #f3fbff; background: #06133f; }
+        .projects-background-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .projects-shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, rgba(2, 8, 35, .80), rgba(4, 15, 65, .74)); }
+        .projects-layout { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(320px, 42%) minmax(0, 58%); gap: 2.2vw; width: 100%; height: 100%; padding: 4vh 4vw 3vh; box-sizing: border-box; }
+        .projects-left { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+        .projects-heading { flex: 0 0 auto; margin-bottom: 2vh; }
+        .projects-kicker { color: #8df6ff; font-size: 12px; letter-spacing: .22em; font-weight: 800; }
+        .projects-heading h1 { margin: 3px 0 0; font-size: clamp(2.6rem, 5vw, 5.8rem); line-height: .95; letter-spacing: -.04em; font-weight: 900; }
+        .projects-heading p { margin: 10px 0 0; color: #8df6ff; font-size: clamp(.75rem, 1.2vw, 1rem); font-weight: 800; letter-spacing: .16em; }
+        .projects-selector { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 10px; padding: 4px 10px 12px 2px; scrollbar-width: thin; scrollbar-color: #8df6ff rgba(13, 28, 83, .7); overscroll-behavior: contain; }
+        .projects-selector::-webkit-scrollbar, .projects-detail-content::-webkit-scrollbar { width: 8px; }
+        .projects-selector::-webkit-scrollbar-track, .projects-detail-content::-webkit-scrollbar-track { background: rgba(13, 28, 83, .7); }
+        .projects-selector::-webkit-scrollbar-thumb, .projects-detail-content::-webkit-scrollbar-thumb { background: #8df6ff; border-radius: 4px; }
+        .projects-card { flex: 0 0 auto; display: grid; grid-template-columns: 42px minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; min-height: 78px; padding: 12px 14px; text-align: left; border: 1px solid rgba(141, 246, 255, .52); border-left: 5px solid #8df6ff; background: rgba(8, 23, 83, .86); color: #f3fbff; cursor: pointer; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); transition: background .18s ease, color .18s ease, transform .18s ease; }
+        .projects-card:hover { background: rgba(28, 55, 125, .96); transform: translateX(3px); }
+        .projects-card.active { background: #8df6ff; color: #07143d; border-color: #8df6ff; }
+        .projects-card-number { align-self: start; font-size: 13px; font-weight: 900; letter-spacing: .1em; }
+        .projects-card-main { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+        .projects-card-title { font-size: clamp(.9rem, 1.25vw, 1.15rem); font-weight: 900; line-height: 1.1; overflow-wrap: anywhere; }
+        .projects-card-subtitle { font-size: 10px; font-weight: 800; letter-spacing: .09em; opacity: .8; }
+        .projects-rank { display: flex; flex-direction: column; align-items: center; gap: 0; font-size: 30px; font-weight: 900; line-height: .95; }
+        .projects-rank small { font-size: 9px; letter-spacing: .12em; }
+        .projects-back { flex: 0 0 auto; align-self: flex-start; margin-top: 12px; padding: 10px 14px; border: 1px solid #8df6ff; color: #8df6ff; background: rgba(3, 14, 53, .7); font-weight: 800; letter-spacing: .08em; cursor: pointer; }
+        .projects-back:hover { background: #8df6ff; color: #07143d; }
+        .projects-detail { display: flex; flex-direction: column; min-width: 0; min-height: 0; align-self: stretch; margin: 3vh 0 1vh; padding: 24px 26px 18px; background: linear-gradient(180deg, rgba(13, 29, 105, .97), rgba(5, 15, 62, .97)); border: 1px solid rgba(141, 246, 255, .48); box-shadow: 12px 12px 0 rgba(0, 0, 20, .35); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); }
+        .projects-detail-header { flex: 0 0 auto; display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 16px; align-items: start; padding-bottom: 18px; border-bottom: 1px solid rgba(141, 246, 255, .35); }
+        .projects-detail-index { color: #8df6ff; font-size: clamp(2.6rem, 4vw, 4.6rem); font-weight: 900; line-height: .95; }
+        .projects-detail-label { color: #8df6ff; font-size: 10px; font-weight: 900; letter-spacing: .14em; }
+        .projects-detail-header h2 { margin: 7px 0 0; font-size: clamp(1.6rem, 3vw, 3rem); line-height: 1; overflow-wrap: anywhere; }
+        .projects-detail-subtitle { margin: 8px 0 0; color: #8df6ff; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+        .projects-detail-content { flex: 1 1 auto; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 18px 12px 16px 0; scrollbar-width: thin; scrollbar-color: #8df6ff rgba(13, 28, 83, .7); overscroll-behavior: contain; }
+        .projects-detail-content h3 { margin: 14px 0 8px; color: #8df6ff; font-size: 12px; letter-spacing: .14em; }
+        .projects-detail-content h3:first-child { margin-top: 0; }
+        .projects-detail-content p, .projects-detail-content li { font-size: clamp(.88rem, 1.15vw, 1.03rem); line-height: 1.65; }
+        .projects-detail-content p { margin: 0; }
+        .projects-detail-content ul { margin: 0; padding-left: 22px; }
+        .projects-detail-content li { padding: 3px 0 5px 3px; }
+        .projects-detail-content li::marker { color: #8df6ff; }
+        .projects-detail-footer { flex: 0 0 auto; padding-top: 12px; border-top: 1px solid rgba(141, 246, 255, .25); color: rgba(243, 251, 255, .7); font-size: 9px; font-weight: 800; letter-spacing: .12em; }
+        .projects-detail-footer span { color: #8df6ff; padding: 0 5px; }
+        @media (max-width: 800px) { .projects-page { height: 100vh; min-height: 0; overflow: auto; } .projects-layout { height: auto; min-height: 100vh; grid-template-columns: 1fr; gap: 16px; padding: 24px 18px; } .projects-left { min-height: 65vh; } .projects-heading h1 { font-size: 3rem; } .projects-selector { max-height: 48vh; } .projects-detail { min-height: 55vh; margin: 0 0 10px; padding: 18px; } .projects-detail-content { max-height: none; } }
+      `}</style>
     </div>
-  );
+  )
 }
