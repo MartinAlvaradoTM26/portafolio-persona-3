@@ -288,42 +288,59 @@ export default function Socials() {
           padding: 0 20px 0 20px;
         }
 
-        /* left: role label */
-        /* Se oculta el rótulo diagonal grande: se superponía con los títulos
-           de las categorías y con las barras vecinas. */
+        /* Rótulo diagonal grande: se conserva, pero queda en su zona izquierda. */
         .sc-role {
-          display: none;
+          position: absolute;
+          left: 88px;
+          top: 0;
+          height: 100%;
+          width: 175px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          z-index: 4;
+          font-family: 'Anton', sans-serif;
+          font-size: clamp(30px, 2.3vw, 42px);
+          letter-spacing: -1.5px;
+          color: #ffffff;
+          transform: rotate(-30deg);
+          user-select: none;
+          line-height: 1;
+          padding: 0;
+          pointer-events: none;
         }
 
-        /* Evita que los nombres de las categorías se desborden en pantallas
-           más estrechas, conservando la estética original. */
+        /* El nombre de la categoría se desplaza a la derecha del rótulo diagonal
+           y se reduce para que no choque con él ni con las estadísticas. */
         .sc-main {
+          flex: 0 1 auto;
           min-width: 0;
-          padding: 0 8px;
-        }
-        .sc-main-top {
-          min-width: 0;
-          max-width: 100%;
-        }
-        .sc-label {
-          font-size: clamp(18px, 1.45vw, 28px);
-          letter-spacing: clamp(1px, 0.2vw, 4px);
-          white-space: nowrap;
-        }
-
-        /* left: icon + name centered in remaining space */
-        .sc-main {
-          flex: 1;
+          width: 250px;
+          margin-left: 285px;
+          padding: 0 4px;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
           justify-content: center;
           gap: 3px;
         }
         .sc-main-top {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 7px;
+          min-width: 0;
+          max-width: 100%;
+        }
+        .sc-label {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(15px, 1.1vw, 21px);
+          letter-spacing: clamp(0.5px, 0.12vw, 2px);
+          line-height: 1;
+          white-space: nowrap;
+          color: rgba(255,255,255,0.85);
+          transition: color 0.2s ease;
+          user-select: none;
         }
 
         .sc-icon {
@@ -338,15 +355,6 @@ export default function Socials() {
         }
         .sc-bar-outer.active .sc-icon { color: rgba(255,255,255,0.25); }
 
-        .sc-label {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 28px;
-          letter-spacing: 4px;
-          line-height: 1;
-          color: rgba(255,255,255,0.85);
-          transition: color 0.2s ease;
-          user-select: none;
-        }
         .sc-bar-outer.active .sc-label { color: #111111; }
 
         /* lb/rb nav row */
