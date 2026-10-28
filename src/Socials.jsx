@@ -289,27 +289,26 @@ export default function Socials() {
         }
 
         /* left: role label */
+        /* Se oculta el rótulo diagonal grande: se superponía con los títulos
+           de las categorías y con las barras vecinas. */
         .sc-role {
-          position: absolute;
-          left: 105px;
-          top: 0;
-          height: 100%;
-          width: 160px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          z-index: 4;
-          flex-shrink: 0;
-          font-family: 'Anton', sans-serif;
-          font-size: 44px;
-          letter-spacing: -2px;
-          color: #ffffff;
-          transform: rotate(-30deg);
-          user-select: none;
-          line-height: 1;
-          padding: 0;
-          pointer-events: none;
+          display: none;
+        }
+
+        /* Evita que los nombres de las categorías se desborden en pantallas
+           más estrechas, conservando la estética original. */
+        .sc-main {
+          min-width: 0;
+          padding: 0 8px;
+        }
+        .sc-main-top {
+          min-width: 0;
+          max-width: 100%;
+        }
+        .sc-label {
+          font-size: clamp(18px, 1.45vw, 28px);
+          letter-spacing: clamp(1px, 0.2vw, 4px);
+          white-space: nowrap;
         }
 
         /* left: icon + name centered in remaining space */
