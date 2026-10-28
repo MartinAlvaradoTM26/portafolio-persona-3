@@ -291,17 +291,17 @@ export default function Socials() {
         /* Rótulo diagonal grande: se conserva, pero queda en su zona izquierda. */
         .sc-role {
           position: absolute;
-          left: 88px;
+          left: 18px;
           top: 0;
           height: 100%;
-          width: 175px;
+          width: 170px;
           display: flex;
           align-items: center;
           justify-content: center;
           text-align: center;
           z-index: 4;
           font-family: 'Anton', sans-serif;
-          font-size: clamp(30px, 2.3vw, 42px);
+          font-size: clamp(27px, 2.1vw, 38px);
           letter-spacing: -1.5px;
           color: #ffffff;
           transform: rotate(-30deg);
@@ -316,8 +316,8 @@ export default function Socials() {
         .sc-main {
           flex: 0 1 auto;
           min-width: 0;
-          width: 250px;
-          margin-left: 285px;
+          width: 245px;
+          margin-left: 190px;
           padding: 0 4px;
           display: flex;
           flex-direction: column;
@@ -334,8 +334,8 @@ export default function Socials() {
         }
         .sc-label {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(15px, 1.1vw, 21px);
-          letter-spacing: clamp(0.5px, 0.12vw, 2px);
+          font-size: clamp(13px, 0.95vw, 18px);
+          letter-spacing: clamp(0.3px, 0.08vw, 1.4px);
           line-height: 1;
           white-space: nowrap;
           color: rgba(255,255,255,0.85);
@@ -666,6 +666,11 @@ export default function Socials() {
         .sc-art-close { position: absolute; top: 22px; right: 28px; border: 1px solid #444; background: #111; color: white; padding: 10px 16px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; cursor: pointer; }
         .sc-art-close:hover { background: #c4001a; border-color: #c4001a; }
         @media (max-width: 760px) {
+          .sc-role { left: 4px; width: 135px; font-size: clamp(23px, 5vw, 32px); }
+          .sc-main { margin-left: 130px; width: 150px; }
+          .sc-label { font-size: clamp(11px, 2.5vw, 15px); letter-spacing: 0.3px; }
+          .sc-stats { gap: 5px; padding-right: 10px; }
+          .sc-stat-num { font-size: 20px; }
           .sc-art-list { left: 52%; bottom: 70px; }
           .sc-info-bar-text { font-size: 15px; letter-spacing: 1px; }
           .sc-art-detail { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; padding: 65px 18px 20px; overflow-y: auto; }
